@@ -8,6 +8,8 @@ HTML5の仕様にあるplaceholder属性を、未対応のブラウザでも擬�
 使い方 - Usage
 =====
 
+サンプル::
+
     <head>
     <script src="./js/jquery.ah-placeholder.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
@@ -25,8 +27,6 @@ HTML5の仕様にあるplaceholder属性を、未対応のブラウザでも擬�
         <input type="submit" name="submit" value="送信" />
     </form>
     </body>
-
-Enjoy.
 
 クレジット - Credit
 ======
