@@ -2,7 +2,7 @@
  * jQuery ah-placeholder plugin 1.1
  *
  * https://github.com/ahomu/jquery.ah-placeholder
- * http://havelog.ayumusato.com/develop/javascript/e274-jquery-plugin-placeholder2.html
+ * http://havelog.ayumusato.com/develop/javascript/e189-jquery-plugin-placeholder.html
  *
  * Copyright (c) 2011 Ayumu Sato ( http://havelog.ayumusato.com )
  *
