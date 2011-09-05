@@ -1,5 +1,5 @@
 /*
- * jQuery ah-placeholder plugin 1.1
+ * jQuery ah-placeholder plugin 1.2
  *
  * https://github.com/ahomu/jquery.ah-placeholder
  * http://havelog.ayumusato.com/develop/javascript/e189-jquery-plugin-placeholder.html
@@ -17,6 +17,7 @@ $.fn.ahPlaceholder = function(options)
     // property
     var defaults = {
             placeholderColor : 'silver',
+            placeholderAttr  : 'title',
             likeApple        : false
         },
         settings = $.extend({}, defaults, options);
@@ -63,7 +64,12 @@ $.fn.ahPlaceholder = function(options)
     // method
     var init    = function()
         {
-            $.data(this, 'placeholder-string', this.title);
+            // placeholderが有効なら処理を必要としないので終了
+            if ( settings.placeholderAttr === 'placeholder' && ('placeholder' in document.createElement('input')) ) {
+                return;
+            }
+
+            $.data(this, 'placeholder-string', $(this).attr(settings.placeholderAttr));
             $.data(this, 'placeholder-color', $(this).css('color'));
 
             var phString    = $.data(this, 'placeholder-string'),
