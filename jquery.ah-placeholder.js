@@ -78,8 +78,6 @@ $.fn.ahPlaceholder = function(options)
 
             if ( self.value === '' ) {
                 self.value = phString;
-            }
-            if ( self.value === phString ) {
                 $self.css('color', settings.placeholderColor);
             }
 
@@ -93,8 +91,9 @@ $.fn.ahPlaceholder = function(options)
             }
 
             $self.closest('form').submit(function() {
-                if ( self.value === $.data(self, 'placeholder-string') ) {
-                    self.value = '';
+                if ( self.value === $.data(self, 'placeholder-string')
+                     && $self.css('color') === settings.placeholderColor ) {
+                         self.value = '';
                 }
                 return true;
             });
