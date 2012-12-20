@@ -24,7 +24,6 @@ $.fn.ahPlaceholder = function(options)
 
     var ngCode  = [
             ' ',  // --------------
-            '0',  // ???
             '9',  // tab
             '16', // shift
             '17', // ctrl
