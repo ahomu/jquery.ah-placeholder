@@ -65,7 +65,7 @@ $.fn.ahPlaceholder = function(options)
     var init    = function()
         {
             // placeholderが有効なら処理を必要としないので終了
-            if ( settings.placeholderAttr === 'placeholder' && ('placeholder' in document.createElement('input')) ) {
+            if (!$.browser.msie) {
                 return;
             }
 
