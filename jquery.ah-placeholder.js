@@ -16,7 +16,7 @@ $.fn.ahPlaceholder = function(options)
 {
     // property
     var defaults = {
-            placeholderColor : 'silver',
+            placeholderColor : $('<div/>').css('color', 'silver').css('color'),
             placeholderAttr  : 'title',
             likeApple        : false
         },
@@ -70,7 +70,7 @@ $.fn.ahPlaceholder = function(options)
             }
 
             $.data(this, 'placeholder-string', $(this).attr(settings.placeholderAttr));
-            $.data(this, 'placeholder-color', $(this).css('color'));
+            $.data(this, 'placeholder-color', settings.placeholderColor);
 
             var phString    = $.data(this, 'placeholder-string'),
                 self        = this,
