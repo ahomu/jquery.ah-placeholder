@@ -92,7 +92,7 @@ $.fn.ahPlaceholder = function(options)
 
             $self.closest('form').submit(function() {
                 if ( self.value === $.data(self, 'placeholder-string')
-                     && $self.css('color') === settings.placeholderColor ) {
+                     && $self.css('color') === $('<div/>').css('color', settings.placeholderColor).css('color')) {
                          self.value = '';
                 }
                 return true;
