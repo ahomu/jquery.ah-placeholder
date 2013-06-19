@@ -24,7 +24,6 @@ $.fn.ahPlaceholder = function(options)
 
     var ngCode  = [
             ' ',  // --------------
-            '0',  // ???
             '9',  // tab
             '16', // shift
             '17', // ctrl
@@ -65,7 +64,7 @@ $.fn.ahPlaceholder = function(options)
     var init    = function()
         {
             // placeholderが有効なら処理を必要としないので終了
-            if ( settings.placeholderAttr === 'placeholder' && ('placeholder' in document.createElement('input')) ) {
+            if (!$.browser.msie) {
                 return;
             }
 
