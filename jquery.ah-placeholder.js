@@ -10,18 +10,19 @@
  *   http://www.opensource.org/licenses/mit-license.php
  *   http://www.gnu.org/licenses/gpl.html
  */
-(function ($) {
+(function($) {
 
-    $.fn.ahPlaceholder = function (options) {
-        // property
-        var defaults = {
-            placeholderColor: 'silver',
-            placeholderAttr: 'title',
-            likeApple: false
+$.fn.ahPlaceholder = function(options)
+{
+    // property
+    var defaults = {
+            placeholderColor : 'silver',
+            placeholderAttr  : 'title',
+            likeApple        : false
         },
         settings = $.extend({}, defaults, options);
 
-        var ngCode = [
+    var ngCode  = [
             ' ',  // --------------
             '0',  // ???
             '9',  // tab
@@ -36,127 +37,131 @@
             '91', // Cmd(L), Win(L)
             '92', // Win(R)
             '93', // Cmd(R)
-            '112', // F1
-            '113', // F2
-            '114', // F3
-            '115', // F4
-            '116', // F5
-            '117', // F6
-            '118', // F7
-            '119', // F8
-            '120', // F9
-            '121', // F10
-            '122', // F11
-            '123', // F12
+            '112',// F1
+            '113',// F2
+            '114',// F3
+            '115',// F4
+            '116',// F5
+            '117',// F6
+            '118',// F7
+            '119',// F8
+            '120',// F9
+            '121',// F10
+            '122',// F11
+            '123',// F12
             ' '   // ---------------
         ].join('@'),
-        keyCatch = (function () {
-            if (document.all) {
-                return function (e) { return e.keyCode; };
-            } else if (document.getElementById) {
-                return function (e) { return (e.keyCode) ? e.keyCode : e.charCode; };
-            } else if (document.layers) {
-                return function (e) { return e.which; };
+        keyCatch = (function(){
+            if ( document.all ) {
+                return function(e){return e.keyCode;};
+            } else if ( document.getElementById ) {
+                return function(e){return (e.keyCode)? e.keyCode: e.charCode;};
+            } else if ( document.layers ) {
+                return function(e){return e.which;};
             }
         })();
 
-        // method
-        var init = function () {
+    // method
+    var init    = function()
+        {
             // placeholderが有効なら処理を必要としないので終了
-            if (settings.placeholderAttr === 'placeholder' && ('placeholder' in document.createElement('input'))) {
+            if ( settings.placeholderAttr === 'placeholder' && ('placeholder' in document.createElement('input')) ) {
                 return;
             }
 
             $.data(this, 'placeholder-string', $(this).attr(settings.placeholderAttr));
             $.data(this, 'placeholder-color', $(this).css('color'));
 
-            var phString = $.data(this, 'placeholder-string'),
-                self = this,
-                $self = $(this);
+            var phString    = $.data(this, 'placeholder-string'),
+                self        = this,
+                $self       = $(this);
 
-            if (self.value === '') {
+            if ( self.value === '' ) {
                 self.value = phString;
-            }
-            if (self.value === phString) {
                 $self.css('color', settings.placeholderColor);
             }
 
-            if (settings.likeApple === true) {
+            if ( settings.likeApple === true ) {
                 $self.bind('mousedown', moveCursorToHead);
                 $self.bind('keydown', onKeydown);
                 $self.bind('keyup', resetPlaceholder);
             } else {
                 $self.bind('focus', onFocus);
-                //$self.bind('blur', resetPlaceholder);
+                $self.bind('blur', resetPlaceholder);
             }
-			//handle copy from context menu (for placefolder recovery , need blur event(can not handle by keyup))
-            $self.bind('contextmenu', onFocus); 
-			$self.bind('blur', resetPlaceholder);
-			
-            $self.closest('form').submit(function () {
-                if (self.value === $.data(self, 'placeholder-string')) {
-                    self.value = '';
+
+            $self.closest('form').submit(function() {
+                if ( self.value === $.data(self, 'placeholder-string')
+                     && $self.css('color') === $('<div/>').css('color', settings.placeholderColor).css('color')) {
+                         self.value = '';
                 }
                 return true;
             });
         },
-        onKeydown = function (e) {
-            if (this.value === $.data(this, 'placeholder-string')) {
+        onKeydown = function(e)
+        {
+            if ( this.value === $.data(this, 'placeholder-string') ) {
                 var key = keyCatch(e);
 
-                if (ngCode.indexOf('@' + key + '@') !== -1) {
+                if ( ngCode.indexOf('@'+key+'@') !== -1 ) {
                     // tabの入力は認める
-                    return (key === 9);
+                    return ( key === 9 );
                 } else {
                     _clearPlaceholder(this);
                 }
             }
         },
-        onFocus = function () {
-            if (this.value === $.data(this, 'placeholder-string')) {
+        onFocus = function()
+        {
+            if ( this.value === $.data(this, 'placeholder-string') ) {
                 _clearPlaceholder(this);
             }
         },
-        resetPlaceholder = function (e) {
-            if (this.value === '') {
+        resetPlaceholder = function(e)
+        {
+            if ( this.value === '' ) {
                 _setPlaceholder(this);
 
-                if (e.type === 'keyup') {
+                if ( e.type === 'keyup' ) {
                     moveCursorToHead.apply(this);
                 }
             }
         },
-        moveCursorToHead = function () {
-            if (this.value === $.data(this, 'placeholder-string')) {
+        moveCursorToHead = function()
+        {
+            if ( this.value === $.data(this, 'placeholder-string') ) {
                 $(this).focus();
-                if (this.createTextRange) {
+                if ( this.createTextRange ) {
                     var range = this.createTextRange();
                     range.collapse();
                     range.moveEnd('character', 0);
                     range.moveStart('character', 0);
-                    setTimeout(function () {
+                    setTimeout(function() {
                         range.select();
                     }, 17);
                 }
-                else if (this.setSelectionRange) {
+                else if ( this.setSelectionRange ) {
                     this.setSelectionRange(0, 0);
                 }
                 return false;
             }
         },
-        _setPlaceholder = function (self) {
+        _setPlaceholder = function(self)
+        {
             self.value = $.data(self, 'placeholder-string');
             $(self).css('color', settings.placeholderColor);
         },
-        _clearPlaceholder = function (self) {
+        _clearPlaceholder = function(self)
+        {
             self.value = '';
             $(self).css('color', $.data(self, 'placeholder-color'));
         };
-        // construct
-        this.each(function () {
-            init.apply(this);
-        });
+    // construct
+    this.each(function()
+    {
+        init.apply(this);
+    });
 
-        return this;
-    };
+    return this;
+};
 })(jQuery);
