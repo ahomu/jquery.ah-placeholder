@@ -85,6 +85,7 @@ $.fn.ahPlaceholder = function(options)
                 $self.bind('mousedown', moveCursorToHead);
                 $self.bind('keydown', onKeydown);
                 $self.bind('keyup', resetPlaceholder);
+                $self.bind('paste', onFocus);
             } else {
                 $self.bind('focus', onFocus);
                 $self.bind('blur', resetPlaceholder);
