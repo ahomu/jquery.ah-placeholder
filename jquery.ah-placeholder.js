@@ -105,7 +105,7 @@ $.fn.ahPlaceholder = function(options)
 
                 if ( ngCode.indexOf('@'+key+'@') !== -1 ) {
                     // tabの入力は認める
-                    return ( key === 9 );
+                    return ( key === 9 || key === 229 );
                 } else {
                     _clearPlaceholder(this);
                 }
