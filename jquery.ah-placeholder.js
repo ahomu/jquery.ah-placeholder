@@ -76,7 +76,7 @@ $.fn.ahPlaceholder = function(options)
                 self        = this,
                 $self       = $(this);
 
-            if ( self.value === '' ) {
+            if ( self.value === '' || this.value === $.data(this, 'placeholder-string') ) {
                 self.value = phString;
                 $self.css('color', settings.placeholderColor);
             }
