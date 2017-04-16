@@ -1,10 +1,10 @@
-#jQuery ah-placeholder Plugin
+# jQuery ah-placeholder Plugin
 
 *A plugin support placeholder attribute alternative.*
 
 HTML5の仕様にあるplaceholder属性を、未対応のブラウザでも擬似的に使えるようにするjQueryプラグインです。title属性に入れた文字列を、プレースホルダー用のテキストとして扱います。
 
-##使い方 - Usage
+## 使い方 - Usage
 
 サンプル:
 
@@ -28,19 +28,19 @@ HTML5の仕様にあるplaceholder属性を、未対応のブラウザでも擬�
     </form>
     </body>
 
-###placeholderAttrオプション
+### placeholderAttrオプション
 
 placeholderAttrオプションがplaceholderの場合、placeholderに対応しているブラウザではスクリプトによる処理を行いません。
 
 likeAppleオプションよりも優先されるため、placeholder対応ブラウザでlikeAppleオプションを有効にしたい場合は、placeholder属性以外（title属性など）を指定してください。
 
-###likeAppleオプション
+### likeAppleオプション
 
 likeAppleオプションがtrueの場合、Focus時点でplaceholderが消えるのでなく文字入力を始めた時点で消える挙動に変更されます。
 
 これは、iOSのMobile Safariや、Safari5.1以降のplaceholderの動作を再現したものです。
 
-##変更履歴 - Change log
+## 変更履歴 - Change log
 
 1.2
 :  placeholderAttrオプションを追加
@@ -48,6 +48,6 @@ likeAppleオプションがtrueの場合、Focus時点でplaceholderが消える
 1.1
 :  likeAppleオプションを追加
 
-##クレジット - Credit
+## クレジット - Credit
 
 Copyright 2011, Ayumu Sato ( http://havelog.ayumusato.com )
